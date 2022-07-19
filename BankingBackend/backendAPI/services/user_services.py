@@ -58,7 +58,7 @@ def login(request: Request):
 def get_user_details(id: int):
 
     user_data = User.objects.get(id=id)
-    
+    print(user_data)
     if user_data:
         user = UserModelSerializer(user_data)
         return Response(user.data, status=status.HTTP_200_OK)
