@@ -49,16 +49,19 @@ def update_user(request: Request, id: int):
 
 
 
-# @api_view(['GET'])
-# def get_accounts(request: Request, name: str, password: str):
-#     user = User.objects.get(full_name=name, password=password)
-#     accounts = Accounts.objects.filter(user_id=user.id)
+@api_view(['GET'])
+def get_user_accounts(request: Request,id: int):
 
-#     if accounts and user:
-#         acc_data = AccountSerializer(accounts, many=True)
-#         user_data = UserModel(user.id,
-#             user.full_name, user.email, user.ph_no,
-#             user.city, user.state, acc_data.data)
-#         user = UserModelSerializer(user_data)
-#         return Response(user.data, status=status.HTTP_200_OK)
-#     return Response(status=status.HTTP_404_NOT_FOUND)
+    res = get_accounts(id)
+    # user = User.objects.get(id=id)
+    # accounts = Accounts.objects.filter(user_id=user.id)
+
+    # if accounts and user:
+    #     acc_data = AccountSerializer(accounts, many=True)
+    #     user_data = UserModel(user.id,
+    #         user.full_name, user.email, user.ph_no,
+    #         user.city, user.state, acc_data.data)
+    #     user = UserModelSerializer(user_data)
+        # return Response(user.data, status=status.HTTP_200_OK)
+    # print(res)
+    return Response(data=res.data, status=res.status_code)
