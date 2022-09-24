@@ -8,7 +8,7 @@ urlpatterns = [
     path('create_user/', views.create_user, name='create-user'),
     path('login/', views.login_user, name='login'),
     path('get_user/<int:id>/', views.get_user, name='get-user'),
-    path('update_user/<int:id>', views.update_user, name='update-user')
-    # path('get_accounts/<str:name>/<str:password>/', views.get_accounts, name='get-accounts')
+    path('update_user/<int:id>', views.update_user, name='update-user'),
+    path('get_accounts/<int:id>/', views.get_user_accounts, name='get-accounts')
 ]
 

@@ -1,10 +1,10 @@
+from datetime import datetime
 from django.db import models
 from django.utils.timezone import now
 
 
 # Create your models here.
-
-today = now()
+account_number = datetime.now()
 class BaseModel(models.Model):
     id = models.BigAutoField(auto_created=True ,primary_key=True, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -33,7 +33,7 @@ class Accounts(BaseModel):
         CURRENT = "Current"
 
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_account")
-    account_no = models.CharField(unique=True, max_length=15)
+    account_no = models.CharField(unique=True, null=True, max_length=15, default=account_number.strftime('%d%m%S'))
     account_type = models.CharField(max_length=20, null=True, choices=Type.choices, default=Type.SAVINGS)
 
     def __str__(self):
@@ -45,9 +45,9 @@ class Balance(BaseModel):
     debit = models.DecimalField(decimal_places=4, max_digits=15, null=True)
     credit = models.DecimalField(decimal_places=4, max_digits=15, null=True)
     total = models.DecimalField(decimal_places=4, max_digits=15)
-    account_no = models.ManyToManyField(Accounts, max_length=15)
+    account_no = models.ForeignKey(Accounts, null=True, max_length=15, on_delete=models.CASCADE, to_field='account_no')
 
     def __str__(self):
-        return f"{self.user_id.full_name} {self.total}"
+        return f"{self.user_id.name} {self.total}"
 
     
