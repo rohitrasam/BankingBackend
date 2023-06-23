@@ -1,7 +1,8 @@
 # created by virtualenv automatically
-*
-venv
-*.pyc
+venv/
 __pycache__/
-
-db.sqlite3
+*.log
+*.pot
+*.pyc
+__pycache__
+.sqlite3
